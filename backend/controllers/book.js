@@ -36,11 +36,13 @@ export const createBook = async (req, res) => {
 
 export const deleteBook = async (req, res) => {
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({ error: true, message: "Invalid id" });
   try {
     await Book.findByIdAndDelete(id);
     res.status(200).json({ error: false, message: "Book deleted" });
   } catch (error) {
-    res.status(404).json({ error: true, message: "Book not found" });
+    res.status(500).json({ error: true, message: "Server error" });
   }
 };
 
