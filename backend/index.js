@@ -2,6 +2,7 @@
 import express from "express";
 import { connectDB } from "./config/db.js";
 import Book from "./models/book.js";
+import mongoose from "mongoose";
 const app = express();
 app.use(express.json());
 /*------------------------------------------------------ */
@@ -56,6 +57,21 @@ app.delete("/books/:id", async (req, res) => {
 });
 /*------------------------------------------------------ */
 
+/*------------------------------------------------------ */
+//Update
+app.put("/books/:id", async (req, res) => {
+  const { id } = req.params;
+  const book = req.body;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({ error: true, message: "Invalid id" });
+  try {
+    const updatedBook = await Book.findByIdAndUpdate(id, book, { new: true });
+    res.status(200).json({ error: false, data: updatedBook });
+  } catch (error) {
+    res.status(404).json({ error: true, message: "Book not found" });
+  }
+});
+//Server
 app.listen(5000, () => {
   console.log("Server start: http://localhost:5000");
 });
