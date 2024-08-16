@@ -1,4 +1,5 @@
 import Book from "../models/book.js";
+/*------------------------------------------------------ */
 
 export const getBooks = async (req, res) => {
   try {
@@ -9,6 +10,8 @@ export const getBooks = async (req, res) => {
     res.status(500).json({ error: true, message: "Server Error" });
   }
 };
+
+/*------------------------------------------------------ */
 
 export const createBook = async (req, res) => {
   const book = req.body;
@@ -29,6 +32,8 @@ export const createBook = async (req, res) => {
   }
 };
 
+/*------------------------------------------------------ */
+
 export const deleteBook = async (req, res) => {
   const { id } = req.params;
   try {
@@ -38,6 +43,8 @@ export const deleteBook = async (req, res) => {
     res.status(404).json({ error: true, message: "Book not found" });
   }
 };
+
+/*------------------------------------------------------ */
 
 export const updateBook = async (req, res) => {
   const { id } = req.params;
