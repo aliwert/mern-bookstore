@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import { IoMdMoon } from "react-icons/io";
 import { FaSun } from "react-icons/fa";
 import { TiPlusOutline } from "react-icons/ti";
-import { FaBook } from "react-icons/fa";
-import { FaBookOpenReader } from "react-icons/fa6";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Container maxW={"1140px"} px={4}>
       <Flex

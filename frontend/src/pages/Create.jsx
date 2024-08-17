@@ -8,6 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useBookStore } from "../store/book";
 
 const Create = () => {
   const [newBook, setNewBook] = useState({
@@ -15,8 +16,11 @@ const Create = () => {
     price: "",
     image: "",
   });
-  const handleAddBook = () => {
-    console.log(newBook);
+  const { createBook } = useBookStore();
+  const handleAddBook = async () => {
+    const { error, message } = await createBook(newBook);
+    console.log("error: " + error);
+    console.log("message:" + message);
   };
   return (
     <Container maxW={"container.sm"}>
@@ -55,7 +59,6 @@ const Create = () => {
                 setNewBook({ ...newBook, image: e.target.value })
               }
             />
-            <br />
             <Button colorScheme="blue" onClick={handleAddBook} w={"full"}>
               Add Book
             </Button>
