@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useBookStore } from "../store/book";
+import { useToast } from "@chakra-ui/react";
 
 const Create = () => {
   const [newBook, setNewBook] = useState({
@@ -16,11 +17,25 @@ const Create = () => {
     price: "",
     image: "",
   });
+  const toast = useToast();
   const { createBook } = useBookStore();
   const handleAddBook = async () => {
     const { error, message } = await createBook(newBook);
-    console.log("error: " + error);
-    console.log("message:" + message);
+    if (!error) {
+      toast({
+        title: "Success",
+        description: message,
+        status: "success",
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: message,
+        status: "error",
+        isClosable: true,
+      });
+    }
   };
   return (
     <Container maxW={"container.sm"}>
