@@ -83,7 +83,7 @@ const BookCard = ({ book }) => {
       shadow="lg"
       rounded="lg"
       overflow="hidden"
-      transition="all 0.3s"
+      transition="all 0.5"
       _hover={{ transform: "translateY(-5px)", shadow: "xl" }}
       bg={bg}
     >
@@ -93,6 +93,7 @@ const BookCard = ({ book }) => {
         h={48}
         w="full"
         objectFit="cover"
+        minHeight="30rem"
       />
 
       <Box p={4}>
