@@ -36,6 +36,7 @@ const Create = () => {
         isClosable: true,
       });
     }
+    setNewBook({ name: "", price: "", image: "" });
   };
   return (
     <Container maxW={"container.sm"}>

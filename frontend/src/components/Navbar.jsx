@@ -22,7 +22,7 @@ const Navbar = () => {
           fontSize="3xl"
           fontWeight="extrabold"
         >
-          <Link to={"/"}>Welcome To BookStore 📚</Link>
+          <Link to={"/"}>BookStore 📚</Link>
         </Text>
 
         <HStack spacing={3} alignItems={"center"}>

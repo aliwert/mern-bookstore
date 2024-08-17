@@ -18,4 +18,38 @@ export const useBookStore = create((set) => ({
     set((state) => ({ books: [...state.books, data.data] }));
     return { error: false, message: "Book created successfully" };
   },
+  fetchBooks: async () => {
+    const res = await fetch("/api/books");
+    const data = await res.json();
+    set({ books: data.data });
+  },
+  deleteBook: async (pid) => {
+    const res = await fetch(`/api/books/${pid}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (!data.error) return { error: true, message: data.message };
+
+    set((state) => ({
+      books: state.books.filter((book) => book._id !== pid),
+    }));
+    return { success: true, message: data.message };
+  },
+  updateBook: async (pid, updatedBook) => {
+    const res = await fetch(`/api/books/${pid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedBook),
+    });
+    const data = await res.json();
+    if (!data.error) return { error: true, message: data.message };
+
+    set((state) => ({
+      books: state.books.map((book) => (book._id === pid ? data.data : book)),
+    }));
+
+    return { error: false, message: data.message };
+  },
 }));
