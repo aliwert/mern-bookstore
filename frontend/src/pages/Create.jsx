@@ -26,7 +26,7 @@ const Create = () => {
         </Heading>
         <Box
           w={"full"}
-          bg={useColorModeValue("white", "gray.900")}
+          bg={useColorModeValue("white", "gray.700")}
           p={5}
           rounded={"lg"}
         >
@@ -55,6 +55,7 @@ const Create = () => {
                 setNewBook({ ...newBook, image: e.target.value })
               }
             />
+            <br />
             <Button colorScheme="blue" onClick={handleAddBook} w={"full"}>
               Add Book
             </Button>
