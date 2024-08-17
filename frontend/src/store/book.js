@@ -28,7 +28,7 @@ export const useBookStore = create((set) => ({
       method: "DELETE",
     });
     const data = await res.json();
-    if (!data.error) return { error: true, message: data.message };
+    if (data.error) return { error: true, message: data.message };
 
     set((state) => ({
       books: state.books.filter((book) => book._id !== pid),
@@ -44,8 +44,7 @@ export const useBookStore = create((set) => ({
       body: JSON.stringify(updatedBook),
     });
     const data = await res.json();
-    if (!data.error) return { error: true, message: data.message };
-
+    if (data.error) return { error: true, message: data.message };
     set((state) => ({
       books: state.books.map((book) => (book._id === pid ? data.data : book)),
     }));
